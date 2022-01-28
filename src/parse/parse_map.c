@@ -1,15 +1,11 @@
 #include "cub3d.h"
 
-static char	**get_map(char *file)
+static char	**get_map(char *file, int fd)
 {
-	int		fd;
 	char	**map;
 	char	*buf;
 	int		i;
 
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-		error("Fd issue");
 	i = 0;
 	map = NULL;
 	buf = NULL;
@@ -19,10 +15,10 @@ static char	**get_map(char *file)
 			continue ;
 		map = (char **)ft_realloc(map, i);
 		if (!map)
-			error("Malloc error 0");
+			error("Malloc error");
 		map[i] = (char *)malloc(sizeof(char) * (ft_strlen(buf) + 1));
 		if (!map[i])
-			error("Malloc error 1");
+			error("Malloc error");
 		ft_strlcpy(map[i], buf, ft_strlen(buf) + 1);
 		free(buf);
 		i++;
@@ -30,25 +26,30 @@ static char	**get_map(char *file)
 	close(fd);
 	map = (char **)ft_realloc(map, i);
 	if (!map)
-		error("Malloc error 2");
+		error("Malloc error");
 	map[i] = (char *)malloc(sizeof(char) * (ft_strlen(buf) + 1));
 	if (!map[i])
-		error("Malloc error 3");
+		error("Malloc error");
 	ft_strlcpy(map[i], buf, ft_strlen(buf) + 1);
 	map = (char **)ft_realloc(map, ++i);
 	if (!map)
-		error("Malloc issue 4");
+		error("Malloc error");
 	map[i] = NULL;
 	free(buf);
 	return (map);
 }
 
-char	**parse_map(char *file)
+int	parse_map(t_parse *all, char *file)
 {
-	char	**map;
+	int		fd;
+	char	*buf;
 
-	map = get_map(file);
-	if (!map)
-		return (NULL);
-	return (map);
+	fd = get_text_and_colors(all, file);
+	if (fd < 0)
+		error("get text and colors");
+	all->map = get_map(file, fd);
+	if (!all->map)
+		error("get_map");
+	// check_map(all); // Проверить карту на валидность
+	return (0);
 }
