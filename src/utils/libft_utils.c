@@ -1,5 +1,15 @@
 #include "cub3d.h"
 
+int	skip_spaces(char *buf)
+{
+	int	i;
+
+	i = 2;
+	while (buf[i] == ' ')
+		i++;
+	return (i);
+}
+
 void	*ft_realloc(char **mas, int count)
 {
 	char	**new;
