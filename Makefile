@@ -1,6 +1,6 @@
 NAME = cub3d
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 MINILIBX = ./lib/minilibx_opengl_20191021/
 LINK_MINILIBX = -Llib/minilibx_opengl_20191021 -lmlx -framework OpenGL -framework AppKit
