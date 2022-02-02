@@ -1,10 +1,11 @@
 #include "cub3d.h"
 
-static int	conv_color(t_parse *all, char *buf, int *color)
+static int	conv_color(t_parse *p, char *buf, int *color)
 {
+	char	**split;
+	char	*tmp;
 	int		i;
 	int		j;
-	char	*tmp;
 
 	i = skip_spaces(buf);
 	tmp = (char *)malloc(sizeof(char) * (ft_strlen(buf) - i));
@@ -18,11 +19,22 @@ static int	conv_color(t_parse *all, char *buf, int *color)
 		i++;
 	}
 	tmp[j] = '\0';
-	*color = 1; // color = new Color(r/255.0F,g/255.0F,b/255.0F,a/255.0F);
-	return (*color);
+	split = ft_split(tmp, ',');
+	if (!split)
+		return (-1);
+	i = -1;
+	while (++i < 3)
+	{
+		color[i] = ft_atoi(split[i]);
+		if (color[i] > 255 || color[i] < 0)
+			error("Wrong rgb val");
+	}
+	free(tmp);
+	free_mas(split);
+	return (1);
 }
 
-static int	get_texture_fd(t_parse *all, char *buf, int *fd)
+static int	get_texture_fd(t_parse *p, char *buf, int *fd)
 {
 	char	*tmp;
 	int		j;
@@ -46,46 +58,46 @@ static int	get_texture_fd(t_parse *all, char *buf, int *fd)
 	return (1);
 }
 
-static int	check(t_parse *all, char *buf)
+static int	check(t_parse *p, char *buf)
 {
 	if (!ft_strncmp(buf, "NO", 2) && buf[2] == ' ')
-		return (get_texture_fd(all, buf, &all->fd_NO));
+		return (get_texture_fd(p, buf, &p->fd_NO));
 	else if (!ft_strncmp(buf, "SO", 2) && buf[2] == ' ')
-		return (get_texture_fd(all, buf, &all->fd_SO));
+		return (get_texture_fd(p, buf, &p->fd_SO));
 	else if (!ft_strncmp(buf, "WE", 2) && buf[2] == ' ')
-		return (get_texture_fd(all, buf, &all->fd_WE));
+		return (get_texture_fd(p, buf, &p->fd_WE));
 	else if (!ft_strncmp(buf, "EA", 2) && buf[2] == ' ')
-		return (get_texture_fd(all, buf, &all->fd_EA));
+		return (get_texture_fd(p, buf, &p->fd_EA));
 	else if (!ft_strncmp(buf, "F", 1) && buf[1] == ' ')
-		return (conv_color(all, buf, &all->f_color));
+		return (conv_color(p, buf, p->f_color));
 	else if (!ft_strncmp(buf, "C", 1) && buf[1] == ' ')
-		return (conv_color(all, buf, &all->c_color));
+		return (conv_color(p, buf, p->c_color));
 	else
 		return (0);
 }
 
-static int	types_are_read(t_parse *all)
+static int	types_are_read(t_parse *p)
 {
-	if (all->fd_EA == 0 || all->fd_NO == 0 || all->fd_SO == 0
-		|| all->fd_WE == 0 || all->c_color == -1
-		|| all->f_color == -1)
+	if (p->fd_EA == 0 || p->fd_NO == 0 || p->fd_SO == 0
+		|| p->fd_WE == 0 || *p->c_color == -1
+		|| *p->f_color == -1)
 		return (0);
 	return (1);
 }
 
-int	get_text_and_colors(t_parse *all, char *file)
+int	get_text_and_colors(t_parse *p, char *file)
 {
 	int		fd;
 	char	*buf;
 	int		ret;
 
-	init_all(all);
+	init_all(p);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		error("Fd issue");
-	while (get_next_line(fd, &buf) && !types_are_read(all))
+	while (get_next_line(fd, &buf) && !types_are_read(p))
 	{
-		ret = check(all, buf);
+		ret = check(p, buf);
 		if (ret < 0)
 			error("ERROR");
 		else if (!ret)

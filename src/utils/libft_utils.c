@@ -1,5 +1,18 @@
 #include "cub3d.h"
 
+void free_mas(char **mas)
+{
+	int i;
+
+	i = 0;
+	while (mas[i])
+	{
+		free(mas[i]);
+		i++;
+	}
+	free(mas);
+}
+
 int	skip_spaces(char *buf)
 {
 	int	i;
