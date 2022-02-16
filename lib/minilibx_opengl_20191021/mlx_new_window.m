@@ -355,7 +355,7 @@ int get_mouse_button(NSEventType eventtype)
       [win setKeyRepeat:1];
       [win makeKeyAndOrderFront:self];
 
-      //      printf("init ctx: current %p ", [NSOpenGLContext currentContext]);
+      //      printf("alloc_and_init ctx: current %p ", [NSOpenGLContext currentContext]);
 
       //      ctx = [[NSOpenGLContext alloc] initWithFormat:pixFmt shareContext:[NSOpenGLContext currentContext]]; //other_context];
       //      [ctx setView:self];
