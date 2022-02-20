@@ -1,5 +1,5 @@
 #include "get_next_line.h"
-# include "cub3d.h"
+#include "cub3d.h"
 
 char	*ft_mod_strdup(char *str)
 {

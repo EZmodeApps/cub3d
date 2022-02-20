@@ -1,5 +1,5 @@
 #include "get_next_line.h"
-# include "cub3d.h"
+#include "cub3d.h"
 
 static int	ft_dupline(char **line, char *buffer)
 {	

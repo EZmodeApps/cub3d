@@ -1,13 +1,13 @@
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# include "cub3d.h"
+# include "../../../inc/cub3d.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <limits.h>
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
+#  define BUFFER_SIZE 256
 # endif
 
 char	*ft_mod_strdup(char *str);

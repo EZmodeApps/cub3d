@@ -1,55 +1,78 @@
-#include "cub3d.h"
+#include "../../inc/cub3d.h"
 
-static char	**get_map(char *file, int fd)
+static char	**alloc_last(t_parse *p, char *buf, int i)
 {
-	char	**map;
+	p->map = (char **)ft_realloc(p->map, i);
+	if (!p->map)
+		error("Malloc error");
+	p->map[i] = (char *)malloc(sizeof(char) * (ft_strlen(buf) + 1));
+	if (!p->map[i])
+		error("Malloc error");
+	ft_strlcpy(p->map[i], buf, ft_strlen(buf) + 1);
+	p->map = (char **)ft_realloc(p->map, ++i);
+	if (!p->map)
+		error("Malloc error");
+	p->map[i] = NULL;
+	free(buf);
+	return (p->map);
+}
+
+static char	**get_map(t_parse *p, char *file, int fd)
+{
 	char	*buf;
 	int		i;
 
-	i = 0;
-	map = NULL;
+	p->map = NULL;
 	buf = NULL;
+	i = 0;
 	while (get_next_line(fd, &buf))
 	{
 		if (buf[0] == '\0')
 			continue ;
-		map = (char **)ft_realloc(map, i);
-		if (!map)
+		p->map = (char **)ft_realloc(p->map, i);
+		if (!p->map)
 			error("Malloc error");
-		map[i] = (char *)malloc(sizeof(char) * (ft_strlen(buf) + 1));
-		if (!map[i])
+		p->map[i] = (char *)malloc(sizeof(char) * (ft_strlen(buf) + 1));
+		if (!p->map[i])
 			error("Malloc error");
-		ft_strlcpy(map[i], buf, ft_strlen(buf) + 1);
+		ft_strlcpy(p->map[i], buf, ft_strlen(buf) + 1);
 		free(buf);
 		i++;
 	}
+	p->height = i;
 	close(fd);
-	map = (char **)ft_realloc(map, i);
-	if (!map)
-		error("Malloc error");
-	map[i] = (char *)malloc(sizeof(char) * (ft_strlen(buf) + 1));
-	if (!map[i])
-		error("Malloc error");
-	ft_strlcpy(map[i], buf, ft_strlen(buf) + 1);
-	map = (char **)ft_realloc(map, ++i);
-	if (!map)
-		error("Malloc error");
-	map[i] = NULL;
-	free(buf);
-	return (map);
+	return (alloc_last(p, buf, i));
 }
 
-int	parse_map(t_parse *all, char *file)
+static void	open_tex_n_sp(t_all *all)
 {
-	int		fd;
-	char	*buf;
+	int	i;
+
+	i = -1;
+	while (++i < 4)
+	{
+		all->tex[i]->img = mlx_xpm_file_to_image(all->win->mlx_ptr,
+				all->tex[i]->path, &all->tex[i]->width, &all->tex[i]->height);
+		if (!all->tex[i]->img)
+			error("Error: Load textures");
+		all->tex[i]->addr = mlx_get_data_addr(all->tex[i]->img,
+				&(all->tex[i]->bits_per_pixel), &(all->tex[i]->line_length),
+				&(all->tex[i]->endian));
+	}
+}
+
+int	parse_map(t_all *all, char *file)
+{
+	int	fd;
 
 	fd = get_text_and_colors(all, file);
 	if (fd < 0)
-		error("get text and colors");
-	all->map = get_map(file, fd);
-	if (!all->map)
-		error("get_map");
-	// check_map(all); // Проверить карту на валидность
+		error("Error: Fd issue on get_text_and_colors");
+	get_map(all->parse, file, fd);
+	if (!all->parse->map)
+		error("Error: Issue in Get_map function");
+	check_map(all->parse);
+	player(all);
+	open_tex_n_sp(all);
 	return (0);
 }
