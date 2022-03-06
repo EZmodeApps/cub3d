@@ -66,7 +66,7 @@ void	alloc_col(t_parse *all)
 	int i;
 
 	i = 0;
-	all->col_coord = malloc(sizeof(int*) * all->col_number);
+	all->col_coord = malloc(sizeof(int**));
 	if (!all->col_coord)
 	{
 		free(all);
@@ -103,9 +103,9 @@ void save_col_coord(t_parse *all)
 				all->col_coord[i][1] = y;
 				i++;
 			}
-			x++;
+			y++;
 		}
-		y++;
+		x++;
 	}
 }
 
