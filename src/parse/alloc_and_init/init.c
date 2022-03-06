@@ -29,6 +29,7 @@ void	init_parse(t_parse *p)
 	p->fd_no = 0;
 	p->fd_so = 0;
 	p->fd_we = 0;
+	p->fd_col = 0;
 	p->play_x = -1;
 	p->play_y = -1;
 	p->check_c = -1;
@@ -40,13 +41,13 @@ void	alloc_tex(t_all *all)
 	int	i;
 
 	i = 0;
-	all->tex = (t_tex **)malloc(sizeof(t_tex *) * 4);
+	all->tex = (t_tex **)malloc(sizeof(t_tex *) * 5); //4
 	if (!all->tex)
 	{
 		free_prev(all);
 		error("Error: All.Tex allocation failed");
 	}
-	while (i < 4)
+	while (i < 5) //4
 	{
 		all->tex[i] = (t_tex *)malloc(sizeof(t_tex));
 		if (!all->tex[i])

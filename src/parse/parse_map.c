@@ -49,7 +49,7 @@ static void	open_tex_n_sp(t_all *all)
 	int	i;
 
 	i = -1;
-	while (++i < 4)
+	while (++i < 5)
 	{
 		all->tex[i]->img = mlx_xpm_file_to_image(all->win->mlx_ptr,
 				all->tex[i]->path, &all->tex[i]->width, &all->tex[i]->height);
@@ -59,6 +59,76 @@ static void	open_tex_n_sp(t_all *all)
 				&(all->tex[i]->bits_per_pixel), &(all->tex[i]->line_length),
 				&(all->tex[i]->endian));
 	}
+}
+
+void	alloc_col(t_parse *all)
+{
+	int i;
+
+	i = 0;
+	all->col_coord = malloc(sizeof(int*) * all->col_number);
+	if (!all->col_coord)
+	{
+		free(all);
+		error("Malloc error");
+	}
+	while (i < all->col_number)
+	{
+		all->col_coord[i] = malloc(sizeof(int) * 2);
+		if (!all->col_coord[i])
+		{
+			free(all);
+			error("Malloc error");
+		}
+		i++;
+	}
+}
+
+void save_col_coord(t_parse *all)
+{
+	int x;
+	int y;
+	int i;
+
+	x = 0;
+	y = 0;
+	i = 0;
+	while (all->map[x])
+	{
+		while (all->map[x][y])
+		{
+			if (all->map[x][y] == '2')
+			{
+				all->col_coord[i][0] = x;
+				all->col_coord[i][1] = y;
+				i++;
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
+void count_col(t_parse *all)
+{
+	int i;
+	int j;
+	int num;
+
+	i = 0;
+	j = 0;
+	num = 0;
+	while (all->map[i][j])
+	{
+		while (all->map[i][j])
+		{
+			if (all->map[i][j] == '2')
+				num++;
+			j++;
+		}
+		i++;
+	}
+	all->col_number = num;
 }
 
 int	parse_map(t_all *all, char *file)
@@ -72,6 +142,9 @@ int	parse_map(t_all *all, char *file)
 	if (!all->parse->map)
 		error("Error: Issue in Get_map function");
 	check_map(all->parse);
+	count_col(all->parse);
+	alloc_col(all->parse);
+	save_col_coord(all->parse);
 	player(all);
 	open_tex_n_sp(all);
 	return (0);

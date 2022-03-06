@@ -23,7 +23,7 @@ static void	draw_texture(t_all *all, int x)
 {
 	unsigned int	color;
 	int				y;
-
+//в рэй добавить текстуру коллектбле
 	tex_init(all);
 	y = all->ray->start - 1;
 	while (++y <= all->ray->end)
@@ -42,6 +42,9 @@ static void	draw_texture(t_all *all, int x)
 		else if (all->ray->side == 3)
 			color = ((unsigned int *)(all->tex[3]->addr))
 			[TEXHEIGHT * all->draw->texy + all->draw->texx];
+//		else if (all-> == )
+//			color = ((unsigned int *)(all->tex[4]->addr))
+//			[TEXHEIGHT * all->draw->texy + all->draw->tex_col];
 		put_pixel(all->win, x, y, color);
 	}
 }
