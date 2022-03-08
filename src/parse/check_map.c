@@ -44,6 +44,23 @@ static void	duplications(t_parse *all, int i, int j, int *dupl)
 		error("Error: Some symbols repeat");
 }
 
+void check_collectibles(t_parse *all, int i, int j)
+{
+	int q = 0;
+	if (all->map[i][j] == '2')
+	{
+		all->col_coord[q][0] = i;
+		all->col_coord[q][1] = j;
+		all->col_number++;
+		printf("i - %d\n", all->col_coord[all->col_number][0]);
+		printf("j - %d\n", all->col_coord[all->col_number][1]);
+		printf("quantity - %d\n", all->col_number);
+		printf("\n\n\n");
+		printf("i original - %d\n", i);
+		printf("j original - %d\n", j);
+	}
+}
+
 void	check_map(t_parse *all)
 {
 	int	i;
@@ -52,6 +69,7 @@ void	check_map(t_parse *all)
 
 	dupl = 0;
 	i = -1;
+
 	while (all->map[++i])
 	{
 		j = -1;
@@ -62,6 +80,7 @@ void	check_map(t_parse *all)
 			//valid_character(all, i, j);
 			valid_character_bonus(all, i, j);
 			duplications(all, i, j, &dupl);
+			check_collectibles(all, i, j);
 			if (all->map[i][j] == '0')
 				surroundness(all, i, j);
 		}

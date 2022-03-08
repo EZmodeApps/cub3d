@@ -78,6 +78,23 @@ void	alloc_parse(t_all *all)
 	}
 	all->parse->play_x = -1;
 	all->parse->play_y = -1;
+	all->parse->col_number = 0;
+	all->parse->col_coord = (int **)malloc(sizeof(int *) * 3);//fix later
+	if (!all->parse->col_coord)
+	{
+		free(all);
+		error("Malloc error");
+	}
+	for (int i = 0; i < 2; i++) //fix later
+	{
+		printf("1\n");
+		all->parse->col_coord[i] = malloc(sizeof(int) * 2);
+		if (!all->parse->col_coord[i])
+		{
+			free(all);
+			error("Malloc error");
+		}
+	}
 }
 
 void	alloc_all(t_all *all)

@@ -72,7 +72,8 @@ void	alloc_col(t_parse *all)
 		free(all);
 		error("Malloc error");
 	}
-	while (i < all->col_number)
+//	while (i < all->col_number)
+	while (i < 3)
 	{
 		all->col_coord[i] = malloc(sizeof(int) * 2);
 		if (!all->col_coord[i])
@@ -101,8 +102,11 @@ void save_col_coord(t_parse *all)
 			{
 				all->col_coord[i][0] = x;
 				all->col_coord[i][1] = y;
+				printf("x - %d\n", all->col_coord[i][0]);
+				printf("y - %d\n", all->col_coord[i][1]);
 				i++;
 			}
+			printf("%c", all->map[x][y]);
 			y++;
 		}
 		x++;
@@ -129,6 +133,7 @@ void count_col(t_parse *all)
 		i++;
 	}
 	all->col_number = num;
+	printf("num - %d\n", all->col_number);
 }
 
 int	parse_map(t_all *all, char *file)
@@ -141,10 +146,10 @@ int	parse_map(t_all *all, char *file)
 	get_map(all->parse, file, fd);
 	if (!all->parse->map)
 		error("Error: Issue in Get_map function");
+	//alloc_col(all->parse);
 	check_map(all->parse);
-	count_col(all->parse);
-	alloc_col(all->parse);
-	save_col_coord(all->parse);
+//	count_col(all->parse);
+	//save_col_coord(all->parse);
 	player(all);
 	open_tex_n_sp(all);
 	return (0);
