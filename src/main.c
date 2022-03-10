@@ -40,8 +40,8 @@ int	main(int argc, char **argv)
 	parse_map(&all, argv[1]);
 	mlx_loop_hook(all.win->mlx_ptr, draw, &all);
 	mlx_hook(all.win->win_ptr, 2, 1L << 0, buttons, &all);
-	mlx_hook(all.win->win_ptr, 17, 5, ft_exit, &all);
 	mlx_hook(all.win->win_ptr, 6, 0L, mouse_move, &all);
+	mlx_hook(all.win->win_ptr, 17, 5, ft_exit, &all);
 	mlx_loop(all.win->mlx_ptr);
 	return (0);
 }

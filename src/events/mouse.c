@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   mouse.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: caniseed <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/20 17:54:31 by caniseed          #+#    #+#             */
-/*   Updated: 2022/02/20 17:54:31 by caniseed         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../inc/cub3d.h"
 
 int	mouse_move(int x, int y, t_all *all)
@@ -17,13 +5,13 @@ int	mouse_move(int x, int y, t_all *all)
 	(void)y;
 
 	if (x > (WIDTH / 2))
-		look_right_bonus(all);
+		look_right_mouse(all);
 	else
-		look_left_bonus(all);
+		look_left_mouse(all);
 	return (1);
 }
 
-void	look_right_bonus(t_all *all)
+void	look_right_mouse(t_all *all)
 {
 	double	olddirx;
 	double	oldplanex;
@@ -40,7 +28,7 @@ void	look_right_bonus(t_all *all)
 						+ all->ray->plane_y * cos(0.0085);
 }
 
-void	look_left_bonus(t_all *all)
+void	look_left_mouse(t_all *all)
 {
 	double	olddirx;
 	double	oldplanex;

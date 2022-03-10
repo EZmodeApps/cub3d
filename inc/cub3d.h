@@ -12,7 +12,7 @@
 # include <fcntl.h>
 # include <math.h>
 
-# define SPEED 1.0
+# define SPEED 0.15
 # define ROTSPEED 0.040
 # define SCALE 10
 # define TEXWIDTH 64
@@ -30,13 +30,10 @@
 
 typedef struct s_parse
 {
-	int 	**col_coord;
-	int		col_number;
 	int		fd_no;
 	int		fd_so;
 	int		fd_we;
 	int		fd_ea;
-	int 	fd_col; /*bonus - collectibles */
 	int		*f_color;
 	int		*c_color;
 	int		check_c;
@@ -162,8 +159,9 @@ char	*get_trim_color(char *buf);
 void	free_mas(char **mas);
 int		skip_spaces(char *buf);
 void	*ft_realloc(char **mas, int count);
-// bonus/mouse.c
-int	mouse_move(int x, int y, t_all *all);
-void	look_right_bonus(t_all *all);
-void	look_left_bonus(t_all *all);
+//bonus
+int		mouse_move(int x, int y, t_all *all);
+void	look_right_mouse(t_all *all);
+void	look_left_mouse(t_all *all);
+
 #endif

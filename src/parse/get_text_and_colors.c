@@ -57,8 +57,6 @@ static int	check(t_all *all, char *buf)
 		return (get_texture(all, buf, 2, &all->parse->fd_no));
 	else if (!ft_strncmp(buf, "SO", 2) && buf[2] == ' ')
 		return (get_texture(all, buf, 3, &all->parse->fd_so));
-	else if (!ft_strncmp(buf, "CO", 2) && buf[2] == ' ') /*bonus - collectibles */
-		return (get_texture(all, buf, 4, &all->parse->fd_col));
 	else if (!ft_strncmp(buf, "F", 1) && buf[1] == ' ')
 		return (conv_color(buf, all->parse->f_color, &all->parse->check_f));
 	else if (!ft_strncmp(buf, "C", 1) && buf[1] == ' ')
