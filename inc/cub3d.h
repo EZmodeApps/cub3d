@@ -159,6 +159,7 @@ char	*get_trim_color(char *buf);
 void	free_mas(char **mas);
 int		skip_spaces(char *buf);
 void	*ft_realloc(char **mas, int count);
+int		check_walls(t_parse *all);
 //bonus
 int		mouse_move(int x, int y, t_all *all);
 void	look_right_mouse(t_all *all);

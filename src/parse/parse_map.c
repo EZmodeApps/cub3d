@@ -72,6 +72,8 @@ int	parse_map(t_all *all, char *file)
 	if (!all->parse->map)
 		error("Error: Issue in Get_map function");
 	check_map(all->parse);
+	if (!(check_walls(all->parse)))
+		error("Error: Map is not surrounded by walls");
 	player(all);
 	open_tex_n_sp(all);
 	return (0);

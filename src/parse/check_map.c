@@ -12,6 +12,36 @@ static void	valid_character(t_parse *all, int i, int j)
 		error("Error: Invalid character found");
 }
 
+int	check_walls(t_parse *all)
+{
+	int	i;
+	int	top;
+	int	bottom;
+	int	mid;
+
+	i = 1;
+	top = 0;
+	bottom = 0;
+	mid = 0;
+	while (all->map[0][top] == '1')
+		top++;
+	while (all->map[all->height][bottom] == '1')
+		bottom++;
+	while (i < all->height - 1)
+	{
+		if (all->map[i][0] == '1' &&
+			all->map[i][(ft_strlen(all->map[i]) - 1)] == '1')
+			mid++;
+		i++;
+	}
+	if (top == ft_strlen(all->map[0]) &&
+		bottom == ft_strlen(all->map[all->height])
+		&& mid == (all->height - 2))
+		return (1);
+	else
+		return (0);
+}
+
 static void	surroundness(t_parse *all, int i, int j)
 {
 	if ((i && all->map[i - 1][j] == ' ')
@@ -48,8 +78,8 @@ void	check_map(t_parse *all)
 				error("Error: Invalid map");
 			valid_character(all, i, j);
 			duplications(all, i, j, &dupl);
-			if (all->map[i][j] == '0')
-				surroundness(all, i, j);
+//			if (all->map[i][j] == '0')
+//				surroundness(all, i, j);
 		}
 	}
 }

@@ -29,9 +29,6 @@ int	main(int argc, char **argv)
 
 	if (argc < 2 || argc > 3 || (argc == 3 && ft_strncmp(argv[2], "--save", 6)))
 		error("Error: Invalid arguments");
-	if (argc == 3 && !ft_strncmp(argv[2], "--save", 6))
-		error("Screenshot");
-	// сам скриншот
 	if (!check_extension(argv[1]))
 		error("Error: Invalid extension");
 	alloc_all(&all);
