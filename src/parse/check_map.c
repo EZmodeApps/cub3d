@@ -34,8 +34,8 @@ int	check_walls(t_parse *all)
 			mid++;
 		i++;
 	}
-	if (top == ft_strlen(all->map[0]) &&
-		bottom == ft_strlen(all->map[all->height])
+	if (top == ft_strlen(all->map[0])
+		&& bottom == ft_strlen(all->map[all->height])
 		&& mid == (all->height - 2))
 		return (1);
 	else

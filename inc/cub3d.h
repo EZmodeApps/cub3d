@@ -108,6 +108,8 @@ typedef struct s_all
 	t_ray	*ray;
 	t_draw	*draw;
 	t_tex	**tex;
+	int		mouse_x;
+	int 	mouse_y;
 }			t_all;
 
 void	error(char *str);

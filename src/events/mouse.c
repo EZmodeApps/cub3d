@@ -4,10 +4,12 @@ int	mouse_move(int x, int y, t_all *all)
 {
 	(void)y;
 
-	if (x > (WIDTH / 2))
+	if (x > all->mouse_x || x > 1035)
 		look_right_mouse(all);
-	else
+	else if (x < all->mouse_x || x < -235)
 		look_left_mouse(all);
+	printf("x - %d\n", x);
+	all->mouse_x = x;
 	return (1);
 }
 
