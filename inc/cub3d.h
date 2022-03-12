@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lholdo <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/12 03:59:11 by lholdo            #+#    #+#             */
+/*   Updated: 2022/03/12 03:59:11 by lholdo           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -12,7 +24,7 @@
 # include <fcntl.h>
 # include <math.h>
 
-# define SPEED 0.15
+# define SPEED 0.25
 # define ROTSPEED 0.040
 # define SCALE 10
 # define TEXWIDTH 64
@@ -109,7 +121,7 @@ typedef struct s_all
 	t_draw	*draw;
 	t_tex	**tex;
 	int		mouse_x;
-	int 	mouse_y;
+	int		mouse_y;
 }			t_all;
 
 void	error(char *str);

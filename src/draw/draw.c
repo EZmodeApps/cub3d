@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lholdo <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/12 03:59:25 by lholdo            #+#    #+#             */
+/*   Updated: 2022/03/12 03:59:25 by lholdo           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static void	tex_init(t_all *all)
@@ -87,10 +99,8 @@ int	draw(t_all *all)
 		convert_rgb(all->parse->c_color[0],
 			all->parse->c_color[1], all->parse->c_color[2]));
 	raycasting(all);
-	// bonus
 	draw_mini_map(all, 0);
 	draw_player(all, 65280);
-	// bonus
 	mlx_put_image_to_window(all->win->mlx_ptr, all->win->win_ptr,
 		all->win->img, 0, 0);
 	return (1);

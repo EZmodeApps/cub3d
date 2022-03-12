@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lholdo <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/12 04:00:39 by lholdo            #+#    #+#             */
+/*   Updated: 2022/03/12 04:00:39 by lholdo           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static void	valid_character(t_parse *all, int i, int j)
@@ -12,6 +24,25 @@ static void	valid_character(t_parse *all, int i, int j)
 		error("Error: Invalid character found");
 }
 
+static int	count_t_b_walls(t_parse *all, int flag)
+{
+	int	top;
+	int	bot;
+
+	top = 0;
+	bot = 0;
+	if (flag == 0)
+		while (all->map[0][top] == '1')
+			top++;
+	else
+		while (all->map[all->height][bot] == '1')
+			bot++;
+	if (flag == 0)
+		return (top);
+	else
+		return (bot);
+}
+
 int	check_walls(t_parse *all)
 {
 	int	i;
@@ -20,13 +51,9 @@ int	check_walls(t_parse *all)
 	int	mid;
 
 	i = 1;
-	top = 0;
-	bottom = 0;
 	mid = 0;
-	while (all->map[0][top] == '1')
-		top++;
-	while (all->map[all->height][bottom] == '1')
-		bottom++;
+	top = count_t_b_walls(all, 0);
+	bottom = count_t_b_walls(all, 1);
 	while (i < all->height - 1)
 	{
 		if (all->map[i][0] == '1' &&
@@ -40,16 +67,6 @@ int	check_walls(t_parse *all)
 		return (1);
 	else
 		return (0);
-}
-
-static void	surroundness(t_parse *all, int i, int j)
-{
-	if ((i && all->map[i - 1][j] == ' ')
-		|| (i < all->height && all->map[i + 1][j] == ' ')
-		|| (j && all->map[i][j - 1] == ' ')
-		|| (j < ft_strlen(all->map[i])
-		&& all->map[i][j + 1] == ' '))
-		error("Error: Map is not surrounded by walls");
 }
 
 static void	duplications(t_parse *all, int i, int j, int *dupl)
@@ -78,8 +95,6 @@ void	check_map(t_parse *all)
 				error("Error: Invalid map");
 			valid_character(all, i, j);
 			duplications(all, i, j, &dupl);
-//			if (all->map[i][j] == '0')
-//				surroundness(all, i, j);
 		}
 	}
 }
