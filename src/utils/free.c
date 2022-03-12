@@ -53,11 +53,11 @@ void	free_tex(t_all *all)
 	while (all->tex[i])
 	{
 		if (all->tex[i]->img)
-			free(all->tex[i]->img);
+			mlx_destroy_image(all->win->mlx_ptr, all->tex[i]->img);
 		if (all->tex[i]->path)
 			free(all->tex[i]->path);
-		if (all->tex[i]->addr)
-			free(all->tex[i]->addr);
+//		if (all->tex[i]->addr)
+//			free(all->tex[i]->addr);
 		if (all->tex[i])
 			free(all->tex[i]);
 		i++;
@@ -70,8 +70,6 @@ void	free_win(t_all *all)
 {
 	free_prev(all);
 	free_tex(all);
-	if (all->win->addr)
-		free(all->win->addr);
 	if (all->win->img)
 		mlx_destroy_image(all->win->mlx_ptr, all->win->img);
 	if (all->win)

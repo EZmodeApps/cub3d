@@ -40,6 +40,8 @@ fclean: clean
 	$(RM) $(NAME)
 	@make fclean -C $(LIBFT)
 
+bonus: all
+
 re: fclean all
 
-.PHONY: all libft mlx clean fclean re
+.PHONY: all libft mlx clean fclean bonus re

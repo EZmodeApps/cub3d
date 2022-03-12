@@ -13,8 +13,8 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define HEIGHT 500
-# define WIDTH 500
+# define HEIGHT 1360
+# define WIDTH 2540
 
 # include "../lib/libft/libft.h"
 # include "../src/utils/gnl/get_next_line.h"
