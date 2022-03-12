@@ -107,5 +107,6 @@ void	alloc_all(t_all *all)
 		free(all->ray);
 		error("Error: All.Draw allocation failed");
 	}
+	all->mouse_x = WIDTH / 2;
 	alloc_tex(all);
 }

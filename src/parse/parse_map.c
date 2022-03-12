@@ -12,6 +12,19 @@
 
 #include "../../inc/cub3d.h"
 
+int	check_split(char **color)
+{
+	int	i;
+
+	i = 0;
+	while (color[i])
+		i++;
+	if (i == 3)
+		return (1);
+	else
+		return (0);
+}
+
 static char	**alloc_last(t_parse *p, char *buf, int i)
 {
 	p->map = (char **)ft_realloc(p->map, i);

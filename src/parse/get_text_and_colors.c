@@ -22,6 +22,8 @@ static int	conv_color(char *buf, int *color, int *check)
 	if (!tmp)
 		return (-1);
 	split = ft_split(tmp, ',');
+	if (!(check_split(split)))
+		error("Error: Wrong rgb value");
 	if (!split)
 		return (-1);
 	i = 0;

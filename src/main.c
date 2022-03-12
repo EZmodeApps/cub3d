@@ -47,7 +47,6 @@ int	main(int argc, char **argv)
 	if (!init_win(&all))
 		free_win(&all);
 	parse_map(&all, argv[1]);
-	all.mouse_x = WIDTH / 2;
 	mlx_loop_hook(all.win->mlx_ptr, draw, &all);
 	mlx_hook(all.win->win_ptr, 2, 1L << 0, buttons, &all);
 	mlx_hook(all.win->win_ptr, 6, 0L, mouse_move, &all);

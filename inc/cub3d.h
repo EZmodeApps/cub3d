@@ -121,7 +121,6 @@ typedef struct s_all
 	t_draw	*draw;
 	t_tex	**tex;
 	int		mouse_x;
-	int		mouse_y;
 }			t_all;
 
 void	error(char *str);
@@ -139,7 +138,8 @@ int		parse_map(t_all *all, char *file);
 int		get_text_and_colors(t_all *all, char *file);
 // parse/player.c
 void	player(t_all *all);
-
+// parse/parse_map.c
+int		check_split(char **color);
 // draw/my_mlx_functions.c
 void	put_pixel(t_win *win, int x, int y, int color);
 int		convert_rgb(int r, int g, int b);
