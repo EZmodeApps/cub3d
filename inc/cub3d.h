@@ -13,8 +13,8 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define HEIGHT 600
-# define WIDTH 800
+# define HEIGHT 720
+# define WIDTH 1280
 
 # include "../lib/libft/libft.h"
 # include "../src/utils/gnl/get_next_line.h"
@@ -162,6 +162,11 @@ int		buttons(int keycode, t_all *all);
 void	look_right(t_all *all);
 void	look_left(t_all *all);
 
+// events/mouse.c
+int		mouse_move(int x, int y, t_all *all);
+void	look_right_mouse(t_all *all);
+void	look_left_mouse(t_all *all);
+
 // utils/free.c
 void	free_parse(t_all *all);
 void	free_prev(t_all *all);
@@ -174,9 +179,5 @@ void	free_mas(char **mas);
 int		skip_spaces(char *buf);
 void	*ft_realloc(char **mas, int count);
 int		check_walls(t_parse *all);
-//bonus
-int		mouse_move(int x, int y, t_all *all);
-void	look_right_mouse(t_all *all);
-void	look_left_mouse(t_all *all);
 
 #endif
