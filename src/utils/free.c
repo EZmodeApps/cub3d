@@ -45,31 +45,9 @@ void	free_not_full_tex(t_all *all, int i)
 	error("Error: All.Tex[i] allocation failed");
 }
 
-void	free_tex(t_all *all)
-{
-	int	i;
-
-	i = 0;
-	while (all->tex[i])
-	{
-		if (all->tex[i]->img)
-			mlx_destroy_image(all->win->mlx_ptr, all->tex[i]->img);
-		if (all->tex[i]->path)
-			free(all->tex[i]->path);
-//		if (all->tex[i]->addr)
-//			free(all->tex[i]->addr);
-		if (all->tex[i])
-			free(all->tex[i]);
-		i++;
-	}
-	if (all->tex)
-		free(all->tex);
-}
-
 void	free_win(t_all *all)
 {
 	free_prev(all);
-	free_tex(all);
 	if (all->win->img)
 		mlx_destroy_image(all->win->mlx_ptr, all->win->img);
 	if (all->win)
