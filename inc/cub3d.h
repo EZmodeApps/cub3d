@@ -132,6 +132,7 @@ void	alloc_tex(t_all *all);
 void	alloc_all(t_all *all);
 // parse/check_map.c
 void	check_map(t_parse *p);
+int		check_walls(t_parse *all);
 // parse/initialize.c
 int		parse_map(t_all *all, char *file);
 // parse/get_text_and_colors.c
@@ -178,6 +179,5 @@ char	*get_trim_color(char *buf);
 void	free_mas(char **mas);
 int		skip_spaces(char *buf);
 void	*ft_realloc(char **mas, int count);
-int		check_walls(t_parse *all);
 
 #endif
