@@ -1,4 +1,60 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lholdo <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/12 04:01:20 by lholdo            #+#    #+#             */
+/*   Updated: 2022/03/12 04:01:20 by lholdo           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
+
+char	*get_trim_color(char *buf)
+{
+	char	*str;
+	int		i;
+	int		j;
+
+	i = skip_spaces(buf);
+	str = (char *)malloc(sizeof(char) * (ft_strlen(buf) - i));
+	if (!str)
+		return (NULL);
+	j = 0;
+	while (buf[i] != '\0')
+	{
+		str[j] = buf[i];
+		j++;
+		i++;
+	}
+	str[j] = '\0';
+	return (str);
+}
+
+void	free_mas(char **mas)
+{
+	int	i;
+
+	i = 0;
+	while (mas[i])
+	{
+		free(mas[i]);
+		i++;
+	}
+	free(mas);
+}
+
+int	skip_spaces(char *buf)
+{
+	int	i;
+
+	i = 2;
+	while (buf[i] == ' ')
+		i++;
+	return (i);
+}
 
 void	*ft_realloc(char **mas, int count)
 {

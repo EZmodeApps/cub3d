@@ -1,4 +1,4 @@
-NAME = cub3d
+NAME = cub3D
 
 FLAGS = -Wall -Wextra -Werror
 
@@ -26,10 +26,10 @@ mlx:
 	@make -C $(MINILIBX)
 
 $(NAME): $(OBJ)
-	gcc $(CFLAGS) $(INC_DIR) $(LINK_MINILIBX) $(LINK_LIBFT) $^ -o $@
+	gcc $(CFLAGS) -g $(INC_DIR) $(LINK_MINILIBX) $(LINK_LIBFT) $^ -o $@
 
 %.o: %.c $(INC)
-	gcc $(CFLAGS) $(INC_DIR) $(INC_LIBFT) $< -c -o $@
+	gcc $(CFLAGS) -g $(INC_DIR) $(INC_LIBFT) $< -c -o $@
 
 clean:
 	$(RM) $(OBJ)
