@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lholdo <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lholdo <lholdo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 04:01:23 by lholdo            #+#    #+#             */
-/*   Updated: 2022/03/12 04:01:23 by lholdo           ###   ########.fr       */
+/*   Updated: 2022/03/12 14:45:43 by lholdo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,10 @@ void	free_win(t_all *all)
 {
 	free_prev(all);
 	free_tex(all);
-	if (all->win->mlx_ptr)
-		free(all->win->mlx_ptr);
-	if (all->win->win_ptr)
-		free(all->win->win_ptr);
-	if (all->win->img)
-		free(all->win->img);
 	if (all->win->addr)
 		free(all->win->addr);
+	if (all->win->img)
+		mlx_destroy_image(all->win->mlx_ptr, all->win->img);
 	if (all->win)
-		free(all->win);
+		mlx_destroy_window(all->win->mlx_ptr, all->win->win_ptr);
 }

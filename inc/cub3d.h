@@ -13,8 +13,8 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define HEIGHT 720
-# define WIDTH 1280
+# define HEIGHT 500
+# define WIDTH 500
 
 # include "../lib/libft/libft.h"
 # include "../src/utils/gnl/get_next_line.h"
@@ -26,7 +26,6 @@
 
 # define SPEED 0.25
 # define ROTSPEED 0.040
-# define SCALE 10
 # define TEXWIDTH 64
 # define TEXHEIGHT 64
 # define W 13
@@ -36,9 +35,6 @@
 # define LEFT 123
 # define RIGHT 124
 # define ESC 53
-# define UDIV 1
-# define VDIV 1
-# define VMOVE 10
 
 typedef struct s_parse
 {

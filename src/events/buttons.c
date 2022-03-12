@@ -106,6 +106,9 @@ int	buttons(int keycode, t_all *all)
 	if (keycode == RIGHT)
 		look_right(all);
 	if (keycode == ESC)
+	{
+		free_win(all);
 		exit(0);
+	}
 	return (1);
 }
